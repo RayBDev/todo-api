@@ -1,3 +1,5 @@
+require("./config/config");
+
 const _ = require("lodash");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -8,7 +10,7 @@ let { Todo } = require("./models/todo");
 let { User } = require("./models/user");
 
 let app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
@@ -92,10 +94,6 @@ app.delete("/todos/:id", (req, res) => {
     });
 });
 
-app.listen(port, () => {
-  console.log(`Started up at port ${port}`);
-});
-
 app.patch("/todos/:id", (req, res) => {
   let id = req.params.id;
   let body = _.pick(req.body, ["text", "completed"]);
@@ -122,6 +120,10 @@ app.patch("/todos/:id", (req, res) => {
     .catch(e => {
       res.status(400).send();
     });
+});
+
+app.listen(port, () => {
+  console.log(`Started up at port ${port}`);
 });
 
 module.exports = { app };
