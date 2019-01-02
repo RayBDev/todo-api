@@ -123,9 +123,6 @@ app.patch("/todos/:id", (req, res) => {
     });
 });
 
-// POST /users
-// pick email and password
-
 app.post("/users", (req, res) => {
   let body = _.pick(req.body, ["email", "password"]);
   let user = new User(body);
