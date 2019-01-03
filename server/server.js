@@ -13,6 +13,9 @@ let { authenticate } = require("./middleware/authenticate");
 let app = express();
 const port = process.env.PORT;
 
+//To prevent mongoose warning
+mongoose.set("useCreateIndex", true);
+
 app.use(bodyParser.json());
 
 app.post("/todos", authenticate, (req, res) => {
